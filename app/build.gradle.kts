@@ -24,7 +24,7 @@ afterEvaluate {
                 from(components["java"])
                 groupId = "com.github.ffrree97"
                 artifactId = "wfsar"
-                version = "1.0.3"
+                version = "1.0.4"
             }
         }
     }
