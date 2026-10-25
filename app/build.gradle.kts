@@ -11,8 +11,6 @@ android {
     defaultConfig {
         minSdk = 23
         targetSdk = 34
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -36,12 +34,9 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.2.1")
+    // فقط الاعتمادات الأساسية للغة و Kotlin دون واجهات الأندرويد الثقيلة
+    implementation("androidx.core:core-ktx:1.12.0")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.1.0")
 }
 
 afterEvaluate {
@@ -51,7 +46,7 @@ afterEvaluate {
                 from(components.getByName("release"))
                 groupId = "com.github.ffrree97"
                 artifactId = "wfsar"
-                version = "1.0.1"
+                version = "1.0.2"
             }
         }
     }
