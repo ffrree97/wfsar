@@ -15,8 +15,9 @@ kotlin {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.24")
+    implementation("org.apache.pdfbox:pdfbox:2.0.29")
 }
-    
+
 afterEvaluate {
     publishing {
         publications {
@@ -24,7 +25,7 @@ afterEvaluate {
                 from(components["java"])
                 groupId = "com.github.ffrree97"
                 artifactId = "wfsar"
-                version = "1.0.4"
+                version = "1.0.5"
             }
         }
     }
