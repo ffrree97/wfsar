@@ -1,7 +1,7 @@
 package com.wfsar.pdfextractor
 
-import org.apache.pdfbox.pdmodel.PDDocument
-import org.apache.pdfbox.text.PDFTextStripper
+import com.tomroush.pdfbox.pdmodel.PDDocument
+import com.tomroush.pdfbox.text.PDFTextStripper
 import java.io.File
 
 class PdfExtractor {

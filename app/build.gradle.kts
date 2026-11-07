@@ -15,7 +15,8 @@ kotlin {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.24")
-    implementation("org.apache.pdfbox:pdfbox:2.0.29")
+    // تم استبدال المكتبة القديمة بمحرك PDFBox المخصص لنظام أندرويد لمنع خطأ java.awt.Point
+    implementation("com.tom-roush:pdfbox-android:2.0.27.0")
 }
 
 afterEvaluate {
