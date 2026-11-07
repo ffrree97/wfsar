@@ -20,12 +20,6 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
 }
 
 dependencies {
@@ -38,6 +32,9 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
+                groupId = "com.github.ffrree97"
+                artifactId = "wfsar"
+                version = "v1.1.6"
             }
         }
     }
