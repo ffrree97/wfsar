@@ -42,7 +42,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.ffrree97"
                 artifactId = "wfsar"
-                version = "1.2.0"
+                version = "1.2.1"
             }
         }
     }
