@@ -30,10 +30,9 @@ android {
 }
 
 dependencies {
-    implementation("com.google.mlkit:text-recognition-arabic:16.0.1")
+    implementation("cz.adaptech.tesseract4android:tesseract4android:4.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.9.0")
 }
 
 afterEvaluate {
@@ -43,7 +42,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.ffrree97"
                 artifactId = "wfsar"
-                version = "1.1.9"
+                version = "1.2.0"
             }
         }
     }

@@ -1,31 +1,31 @@
 package com.wfsar.pdfextractor
 
 import android.graphics.Bitmap
-import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.text.Text
-import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.arabic.ArabicTextRecognizerOptions
-import kotlinx.coroutines.tasks.await
+import com.googlecode.tesseract.android.TessBaseAPI
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.Closeable
 import java.util.concurrent.atomic.AtomicBoolean
 
-/** Closeable wrapper around the dedicated Arabic ML Kit text recognizer. */
-class OcrEngine : Closeable {
+class OcrEngine(
+    tessDataParentPath: String,
+    language: String = "ara"
+) : Closeable {
     private val closed = AtomicBoolean(false)
+    private val tessBaseApi = TessBaseAPI().apply {
+        val ok = init(tessDataParentPath, language)
+        require(ok) { "Tesseract init failed at: $tessDataParentPath" }
+    }
 
-    private val recognizer = TextRecognition.getClient(
-        ArabicTextRecognizerOptions.Builder().build()
-    )
-
-    /** Recognizes Arabic text from [bitmap]. The caller retains ownership of the bitmap. */
-    suspend fun recognize(bitmap: Bitmap): Text {
+    suspend fun recognize(bitmap: Bitmap): String = withContext(Dispatchers.Default) {
         check(!closed.get()) { "OcrEngine is closed" }
-        return recognizer.process(InputImage.fromBitmap(bitmap, 0)).await()
+        tessBaseApi.setImage(bitmap)
+        tessBaseApi.utF8Text ?: ""
     }
 
     override fun close() {
         if (closed.compareAndSet(false, true)) {
-            recognizer.close()
+            tessBaseApi.recycle()
         }
     }
 }
