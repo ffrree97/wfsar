@@ -1,2 +1,6 @@
 jdk:
   - openjdk17
+before_install:
+  - sdk install gradle 8.9
+install:
+  - gradle publishToMavenLocal --no-daemon --console=plain
