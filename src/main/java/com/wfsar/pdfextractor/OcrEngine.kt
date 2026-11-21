@@ -17,8 +17,16 @@ class OcrEngine(
         require(ok) { "Tesseract init failed at: $tessDataParentPath" }
     }
 
-    suspend fun recognize(bitmap: Bitmap): String = withContext(Dispatchers.Default) {
+    suspend fun recognize(
+        bitmap: Bitmap,
+        singleLine: Boolean = false
+    ): String = withContext(Dispatchers.Default) {
         check(!closed.get()) { "OcrEngine is closed" }
+        tessBaseApi.pageSegMode = if (singleLine) {
+            TessBaseAPI.PageSegMode.PSM_SINGLE_LINE
+        } else {
+            TessBaseAPI.PageSegMode.PSM_AUTO
+        }
         tessBaseApi.setImage(bitmap)
         tessBaseApi.utF8Text ?: ""
     }
